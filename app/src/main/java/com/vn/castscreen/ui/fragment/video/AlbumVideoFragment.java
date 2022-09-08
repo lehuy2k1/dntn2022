@@ -28,9 +28,7 @@ import java.util.ArrayList;
 public class AlbumVideoFragment extends BaseFragment<FragmentAlbumVideoBinding> implements OnClickItemListener<FolderMedia> {
 
     private String TAG = "AlbumVideoFragment";
-    private ArrayList<FolderMedia> allFolderVideo = new ArrayList<>();
 
-    private boolean isFolder = false;
     private AlbumPhotoAdapter adapter;
 
     @Override
@@ -59,7 +57,9 @@ public class AlbumVideoFragment extends BaseFragment<FragmentAlbumVideoBinding> 
 
     @SuppressLint("Recycle")
     private ArrayList<FolderMedia> getAllFolderImage() {
-
+        boolean isFolder = false;
+        ArrayList<FolderMedia> allFolderVideo = new ArrayList<>();
+        allFolderVideo.clear();
 
         int position = 0;
         Uri uri;
@@ -79,15 +79,15 @@ public class AlbumVideoFragment extends BaseFragment<FragmentAlbumVideoBinding> 
 
             for (int i = 0; i < allFolderVideo.size(); i++) {
 
-//                if (cursor.getString(columnIndexFolderName) != null) {
-                if (allFolderVideo.get(i).getName().equals(cursor.getString(columnIndexFolderName))) {
-                    isFolder = true;
-                    position = i;
-                    break;
-                } else {
-                    isFolder = false;
+                if (cursor.getString(columnIndexFolderName) != null&& allFolderVideo.get(i) != null && allFolderVideo.get(i).getName() != null) {
+                    if (allFolderVideo.get(i).getName().equals(cursor.getString(columnIndexFolderName))) {
+                        isFolder = true;
+                        position = i;
+                        break;
+                    } else {
+                        isFolder = false;
+                    }
                 }
-//                }
             }
             if (isFolder) {
                 ArrayList<String> listPath = new ArrayList<>();

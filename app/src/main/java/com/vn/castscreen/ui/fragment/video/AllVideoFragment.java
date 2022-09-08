@@ -80,9 +80,8 @@ public class AllVideoFragment extends BaseFragment<FragmentAllVideoBinding> impl
     public void onClickItem(String item) {
         Bundle bundle = new Bundle();
         bundle.putSerializable("item", item);
-//        count = 0;
-//        playMediaFiles(item, Utils.video);
-        Navigation.findNavController(requireView()).navigate(R.id.action_videoFragment_to_castVideoFragment, bundle);
+        count = 0;
+        playMediaFiles(item, Utils.video);
     }
 
 

@@ -27,14 +27,14 @@ public class AlbumPhotoFragment extends BaseFragment<FragmentAlbumBinding> imple
 
     private String TAG = "ALBUM_PHOTO";
 
-    private final ArrayList<FolderMedia> allFolderImage = new ArrayList<>();
-    private boolean isFolder = false;
+
     private AlbumPhotoAdapter adapter;
 
     @Override
     protected FragmentAlbumBinding getBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentAlbumBinding.inflate(inflater, container, false);
     }
+
     @Override
     protected void initEvent() {
 
@@ -52,7 +52,10 @@ public class AlbumPhotoFragment extends BaseFragment<FragmentAlbumBinding> imple
 
     @SuppressLint("Recycle")
     private ArrayList<FolderMedia> getAllFolderImage() {
-//        allFolderImage.clear();
+        boolean isFolder = false;
+
+        final ArrayList<FolderMedia> allFolderImage = new ArrayList<>();
+        allFolderImage.clear();
         int position = 0;
         Uri uri;
         Cursor cursor;
@@ -69,7 +72,7 @@ public class AlbumPhotoFragment extends BaseFragment<FragmentAlbumBinding> imple
         while (cursor.moveToNext()) {
             absolutePathOfImage = cursor.getString(columnIndexData);
             for (int i = 0; i < allFolderImage.size(); i++) {
-//                if (cursor.getString(columnIndexFolderName) != null) {
+                if (cursor.getString(columnIndexFolderName) != null) {
                     if (allFolderImage.get(i).getName().equals(cursor.getString(columnIndexFolderName))) {
                         isFolder = true;
                         position = i;
@@ -77,14 +80,14 @@ public class AlbumPhotoFragment extends BaseFragment<FragmentAlbumBinding> imple
                     } else {
                         isFolder = false;
                     }
-//                }
+                }
             }
             if (isFolder) {
                 try {
                     ArrayList<String> listPath = new ArrayList<>(allFolderImage.get(position).getListPath());
                     listPath.add(absolutePathOfImage);
                     allFolderImage.get(position).setListPath(listPath);
-                }catch (NullPointerException exception){
+                } catch (NullPointerException exception) {
                     exception.printStackTrace();
                 }
             } else {
@@ -98,12 +101,14 @@ public class AlbumPhotoFragment extends BaseFragment<FragmentAlbumBinding> imple
         }
         return allFolderImage;
     }
+
     @Override
     public void onClickItem(FolderMedia item) {
         Bundle bundle = new Bundle();
         bundle.putParcelable("folderMedia", item);
         Navigation.findNavController(requireView()).navigate(R.id.action_photoFragment_to_detailAlbumsFragment, bundle);
     }
+
     @Override
     public void onResume() {
         super.onResume();
