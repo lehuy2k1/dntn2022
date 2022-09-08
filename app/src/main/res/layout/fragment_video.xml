@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/backgroud_main"
+    tools:context=".ui.fragment.video.VideoFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar_photo"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imv_back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="15dp"
+            android:foreground="?actionBarItemBackground"
+            android:padding="5dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/video"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imv_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imv_cast"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="15dp"
+            android:foreground="?actionBarItemBackground"
+            android:padding="5dp"
+            android:src="@drawable/ic_cast"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_video"
+        style="@style/MyTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/backgroud_main"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_photo"
+        app:tabSelectedTextColor="@color/color_text_title"
+        app:tabTextColor="@color/white" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_page_video"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tab_layout_video" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

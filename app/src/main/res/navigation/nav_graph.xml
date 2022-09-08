@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.vn.castscreen.ui.fragment.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_findDeviceFragment"
+            app:destination="@id/findDeviceFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_photoFragment"
+            app:destination="@id/photoFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/findDeviceFragment"
+        android:name="com.vn.castscreen.ui.fragment.FindDeviceFragment"
+        android:label="fragment_find_device"
+        tools:layout="@layout/fragment_find_device">
+        <action
+            android:id="@+id/action_navigation_to_webbrowsercast"
+            app:destination="@+id/webBrowserCastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.vn.castscreen.ui.fragment.photo.PhotoFragment"
+        android:label="fragment_photo"
+        tools:layout="@layout/fragment_photo">
+        <action
+            android:id="@+id/action_photoFragment_to_detailAlbumsFragment"
+            app:destination="@id/detailAlbumsFragment" />
+        <action
+            android:id="@+id/action_photoFragment_to_castImageFragment"
+            app:destination="@+id/castImagesFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailAlbumsFragment"
+        android:name="com.vn.castscreen.ui.fragment.photo.DetailAlbumsPhotoFragment"
+        android:label="fragment_detail_albums"
+        tools:layout="@layout/fragment_detail_albums">
+        <action
+            android:id="@+id/action_backpress_detail"
+            app:destination="@+id/photoFragment" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.vn.castscreen.ui.fragment.video.VideoFragment"
+        android:label="fragment_video"
+        tools:layout="@layout/fragment_video">
+        <action
+            android:id="@+id/action_videoFragment_to_detailAlbumsVideoFragment"
+            app:destination="@id/detailAlbumsVideoFragment" />
+        <action
+            android:id="@+id/action_videoFragment_to_castVideoFragment"
+            app:destination="@+id/castVideoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailAlbumsVideoFragment"
+        android:name="com.vn.castscreen.ui.fragment.video.DetailAlbumsVideoFragment"
+        android:label="fragment_detail_albums_video"
+        tools:layout="@layout/fragment_detail_albums_video" />
+    <fragment
+        android:id="@+id/castImagesFragment"
+        android:name="com.vn.castscreen.ui.fragment.photo.CastImagesFragment"
+        android:label="CastImagesFragment"
+        tools:layout="@layout/layout_fragment_cast_photo">
+        <action
+            android:id="@+id/action_popbackpress"
+            app:destination="@+id/photoFragment" />
+    </fragment>
+
+</navigation>

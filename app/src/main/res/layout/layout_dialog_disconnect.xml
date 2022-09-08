@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    tools:background="@drawable/bg_main">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/radius_dialog_10"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txt_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:gravity="start"
+            android:maxLines="2"
+            android:text="@string/connecting_to"
+            android:textColor="@color/color_1D1D1D"
+            android:textSize="12sp"
+            app:autoSizeMinTextSize="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/svn_gilroy_bold"
+            android:maxLines="2"
+            android:paddingStart="3dp"
+            android:textColor="@color/color_222222"
+            android:textSize="13sp"
+            app:autoSizeMinTextSize="12dp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_content"
+            app:layout_constraintStart_toEndOf="@+id/txt_content"
+            app:layout_constraintTop_toTopOf="@+id/txt_content"
+            tools:ignore="RtlSymmetry" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_content">
+
+            <TextView
+                android:id="@+id/btn_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="@font/svn_silroy_medium"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="@string/cancel"
+                android:textAllCaps="true"
+                android:textColor="@color/color_8E8E8E"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/btn_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:fontFamily="@font/svn_silroy_medium"
+                android:padding="6dp"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:text="@string/disconnect"
+                android:textAllCaps="true"
+                android:textColor="@color/color_002884"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/btn_no"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

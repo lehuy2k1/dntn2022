@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">CastScreen</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="cast_to_tv">Cast To TV</string>
+
+    <string name="photo">Photo</string>
+    <string name="video">Video</string>
+
+    <string name="tv_connection">TV connection guide</string>
+
+    <string name="all_photos">All Photos</string>
+    <string name="all_videos">All Video</string>
+    <string name="searching_for_device">Searching for devices…</string>
+
+
+    <string name="album">Album</string>
+    <string name="connect_success">Connect success</string>
+    <string name="connect_fail">Connect fail</string>
+
+    <string name="search_here">Search here</string>
+    <string name="connecting_to">Connecting to</string>
+    <string name="cancel">Cancel</string>
+    <string name="disconnect">Disconnect</string>
+
+
+    <string name="pref_key_client_con_timeout">PREF_KEY_CLIENT_CON_TIMEOUT</string>
+    <string name="pref_key_jpeg_quality">PREF_KEY_JPEG_QUALITY</string>
+    <string name="pref_key_server_port">PREF_KEY_SERVER_PORT</string>
+    <string name="main_activity_start_stream">Start stream</string>
+    <string name="image_generator_on_device">ON DEVICE</string>
+    <string name="image_generator_press">PRESS</string>
+    <string name="unknown">Unknown</string>
+    <string name="notification_screen_sharing_title">Screen Share</string>
+    <string name="notification_screen_sharing_desc">Connected device has been set to screen sharing.</string>
+    <string name="notification_disconnect_action">Disconnect</string>
+    <string name="notification_remote_camera_title">Phone Camera</string>
+    <string name="notification_remote_camera_desc">Phone Camera is running.</string>
+</resources>
