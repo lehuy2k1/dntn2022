@@ -190,6 +190,7 @@ public class WebOSTVServiceSocketClient extends WebSocketClient implements Servi
 
             state = State.CONNECTING;
         }
+
         setupSSL();
 
         super.connect();
@@ -437,7 +438,7 @@ public class WebOSTVServiceSocketClient extends WebSocketClient implements Servi
         String deviceModel = Build.MODEL;
 
         // OS Version
-        String OSVersion = String.valueOf(Build.VERSION.SDK_INT);
+        String OSVersion = String.valueOf(android.os.Build.VERSION.SDK_INT);
 
         // resolution
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -591,7 +592,7 @@ public class WebOSTVServiceSocketClient extends WebSocketClient implements Servi
             public void onSuccess(Object object) {
                 if (object instanceof JSONObject) {
                     PairingType pairingType = PairingType.NONE;
-                    
+
                     JSONObject jsonObj = (JSONObject)object;
                     String type = jsonObj.optString("pairingType");
                     if (type.equalsIgnoreCase("PROMPT")) {
@@ -812,7 +813,7 @@ public class WebOSTVServiceSocketClient extends WebSocketClient implements Servi
         //Web-Socket 1.3.7 patch
         try {
             setSocket(sslContext.getSocketFactory().createSocket());
-			setConnectionLostTimeout(0);
+            setConnectionLostTimeout(0);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (RuntimeException e) {
@@ -966,8 +967,8 @@ public class WebOSTVServiceSocketClient extends WebSocketClient implements Servi
         public void onRegistrationFailed(ServiceCommandError error);
         public Boolean onReceiveMessage(JSONObject message);
 
-         public void updateClientKey(String ClientKey);
-         public void updateUUID(String UUID);
-         public void updateIPAddress(String IPAddress);
+        public void updateClientKey(String ClientKey);
+        public void updateUUID(String UUID);
+        public void updateIPAddress(String IPAddress);
     }
 }

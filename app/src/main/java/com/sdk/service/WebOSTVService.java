@@ -82,16 +82,11 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public static final String ID = "webOS TV";
     private static final String MEDIA_PLAYER_ID = "MediaPlayer";
 
-    public interface SecureAccessTestListener extends ResponseListener<Boolean> {
-    }
+    public interface SecureAccessTestListener extends ResponseListener<Boolean> { }
 
-    public interface ACRAuthTokenListener extends ResponseListener<String> {
+    public interface ACRAuthTokenListener extends ResponseListener<String> { }
 
-    }
-
-    public interface LaunchPointsListener extends ResponseListener<JSONArray> {
-
-    }
+    public interface LaunchPointsListener extends ResponseListener<JSONArray> { }
 
     static String FOREGROUND_APP = "ssap://com.webos.applicationManager/getForegroundAppInfo";
     static String APP_STATUS = "ssap://com.webos.service.appstatus/getAppStatus";
@@ -140,29 +135,41 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public CapabilityPriorityLevel getPriorityLevel(Class<? extends CapabilityMethods> clazz) {
         if (clazz.equals(MediaPlayer.class)) {
             return getMediaPlayerCapabilityLevel();
-        } else if (clazz.equals(MediaControl.class)) {
+        }
+        else if (clazz.equals(MediaControl.class)) {
             return getMediaControlCapabilityLevel();
-        } else if (clazz.equals(Launcher.class)) {
+        }
+        else if (clazz.equals(Launcher.class)) {
             return getLauncherCapabilityLevel();
-        } else if (clazz.equals(TVControl.class)) {
+        }
+        else if (clazz.equals(TVControl.class)) {
             return getTVControlCapabilityLevel();
-        } else if (clazz.equals(VolumeControl.class)) {
+        }
+        else if (clazz.equals(VolumeControl.class)) {
             return getVolumeControlCapabilityLevel();
-        } else if (clazz.equals(ExternalInputControl.class)) {
+        }
+        else if (clazz.equals(ExternalInputControl.class)) {
             return getExternalInputControlPriorityLevel();
-        } else if (clazz.equals(MouseControl.class)) {
+        }
+        else if (clazz.equals(MouseControl.class)) {
             return getMouseControlCapabilityLevel();
-        } else if (clazz.equals(TextInputControl.class)) {
+        }
+        else if (clazz.equals(TextInputControl.class)) {
             return getTextInputControlCapabilityLevel();
-        } else if (clazz.equals(PowerControl.class)) {
+        }
+        else if (clazz.equals(PowerControl.class)) {
             return getPowerControlCapabilityLevel();
-        } else if (clazz.equals(KeyControl.class)) {
+        }
+        else if (clazz.equals(KeyControl.class)) {
             return getKeyControlCapabilityLevel();
-        } else if (clazz.equals(ToastControl.class)) {
+        }
+        else if (clazz.equals(ToastControl.class)) {
             return getToastControlCapabilityLevel();
-        } else if (clazz.equals(WebAppLauncher.class)) {
+        }
+        else if (clazz.equals(WebAppLauncher.class)) {
             return getWebAppLauncherCapabilityLevel();
-        } else if (clazz.equals(PlaylistControl.class)) {
+        }
+        else if (clazz.equals(PlaylistControl.class)) {
             return getPlaylistControlCapabilityLevel();
         }
         return CapabilityPriorityLevel.NOT_SUPPORTED;
@@ -172,7 +179,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public void setServiceDescription(ServiceDescription serviceDescription) {
         super.setServiceDescription(serviceDescription);
 
-        if (this.serviceDescription.getVersion() == null && this.serviceDescription.getResponseHeaders() != null) {
+        if (this.serviceDescription.getVersion() == null && this.serviceDescription.getResponseHeaders() != null)
+        {
             String serverInfo = serviceDescription.getResponseHeaders().get("Server").get(0);
             String systemOS = serverInfo.split(" ")[0];
             String[] versionComponents = systemOS.split("/");
@@ -220,6 +228,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
                     WebOSTVServiceSocketClient.getURI(this.getServiceDescription().getIpAddress(), this.getServiceDescription().getPort()));
             this.socket.setListener(mSocketListener);
         }
+
         if (!this.isConnected())
             this.socket.connect();
     }
@@ -290,16 +299,14 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
         }
 
         @Override
-        public Boolean onReceiveMessage(JSONObject message) {
-            return true;
-        }
+        public Boolean onReceiveMessage(JSONObject message) { return true; }
 
         @Override
         public void updateClientKey(String ClientKey) {
             try {
                 setClientKey(ClientKey);
             } catch (Exception e) {
-                Log.e("sdk", e.getMessage(), e);
+                Log.e("ConnectSDK",e.getMessage(), e);
             }
         }
 
@@ -392,12 +399,12 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     }
 
     @Override
-    public void launchAppWithInfo(AppInfo appInfo, AppLaunchListener listener) {
+    public void launchAppWithInfo(AppInfo appInfo, Launcher.AppLaunchListener listener) {
         launchAppWithInfo(appInfo, null, listener);
     }
 
     @Override
-    public void launchAppWithInfo(final AppInfo appInfo, Object params, final AppLaunchListener listener) {
+    public void launchAppWithInfo(final AppInfo appInfo, Object params, final Launcher.AppLaunchListener listener) {
         String uri = "ssap://system.launcher/launch";
         JSONObject payload = new JSONObject();
 
@@ -452,7 +459,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
 
 
     @Override
-    public void launchBrowser(String url, final AppLaunchListener listener) {
+    public void launchBrowser(String url, final Launcher.AppLaunchListener listener) {
         String uri = "ssap://system.launcher/open";
         JSONObject payload = new JSONObject();
 
@@ -489,8 +496,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     }
 
     @Override
-    public void launchYouTube(String contentId, AppLaunchListener listener) {
-        launchYouTube(contentId, (float) 0.0, listener);
+    public void launchYouTube(String contentId, Launcher.AppLaunchListener listener) {
+        launchYouTube(contentId, (float)0.0, listener);
     }
 
     @Override
@@ -514,11 +521,12 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
             setId("youtube.leanback.v4");
             setName("YouTube");
         }};
+
         launchAppWithInfo(appInfo, params, listener);
     }
 
     @Override
-    public void launchHulu(String contentId, AppLaunchListener listener) {
+    public void launchHulu(String contentId, Launcher.AppLaunchListener listener) {
         JSONObject params = new JSONObject();
 
         try {
@@ -536,7 +544,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     }
 
     @Override
-    public void launchNetflix(String contentId, AppLaunchListener listener) {
+    public void launchNetflix(String contentId, Launcher.AppLaunchListener listener) {
         JSONObject params = new JSONObject();
         String netflixContentId = "m=http%3A%2F%2Fapi.netflix.com%2Fcatalog%2Ftitles%2Fmovies%2F" + contentId + "&source_type=4";
 
@@ -607,7 +615,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
                     JSONArray apps = (JSONArray) jsonObj.get("apps");
                     List<AppInfo> appList = new ArrayList<AppInfo>();
 
-                    for (int i = 0; i < apps.length(); i++) {
+                    for (int i = 0; i < apps.length(); i++)
+                    {
                         final JSONObject appObj = apps.getJSONObject(i);
 
                         AppInfo appInfo = new AppInfo() {{
@@ -624,6 +633,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onError(ServiceCommandError error) {
                 Util.postError(listener, error);
@@ -653,6 +663,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public ServiceSubscription<AppStateListener> subscribeAppState(LaunchSession launchSession, AppStateListener listener) {
         return (URLServiceSubscription<AppStateListener>) getAppState(true, launchSession, listener);
     }
+
+
     /******************
      TOAST CONTROL
      *****************/
@@ -672,13 +684,15 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     }
 
     @Override
-    public void showToast(String message, String iconData, String iconExtension, ResponseListener<Object> listener) {
+    public void showToast(String message, String iconData, String iconExtension, ResponseListener<Object> listener)
+    {
         JSONObject payload = new JSONObject();
 
         try {
             payload.put("message", message);
 
-            if (iconData != null) {
+            if (iconData != null)
+            {
                 payload.put("iconData", iconData);
                 payload.put("iconExtension", iconExtension);
             }
@@ -772,11 +786,11 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public void volumeUp(ResponseListener<Object> listener) {
         String uri = "ssap://audio/volumeUp";
         ServiceCommand<ResponseListener<Object>> request = new ServiceCommand<ResponseListener<Object>>(this, uri, null, true, listener);
-        request.send();
 
+        request.send();
     }
 
-    public void volumeDow() {
+    public void volumeDown() {
         volumeDown(null);
     }
 
@@ -796,7 +810,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public void setVolume(float volume, ResponseListener<Object> listener) {
         String uri = "ssap://audio/setVolume";
         JSONObject payload = new JSONObject();
-        int intVolume = (int) Math.round(volume * 100.0f);
+        int intVolume = (int) Math.round(volume*100.0f);
 
         try {
             payload.put("volume", intVolume);
@@ -880,7 +894,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
         return null;
     }
 
-    private void displayMedia(JSONObject params, final LaunchListener listener) {
+    private void displayMedia(JSONObject params, final MediaPlayer.LaunchListener listener) {
         String uri = "ssap://media.viewer/open";
 
         ResponseListener<Object> responseListener = new ResponseListener<Object>() {
@@ -907,7 +921,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     }
 
     @Override
-    public void displayImage(final String url, final String mimeType, final String title, final String description, final String iconSrc, final LaunchListener listener) {
+    public void displayImage(final String url, final String mimeType, final String title, final String description, final String iconSrc, final MediaPlayer.LaunchListener listener) {
         if ("4.0.0".equalsIgnoreCase(this.serviceDescription.getVersion())) {
             DeviceService dlnaService = this.getDLNAService();
 
@@ -967,7 +981,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     }
 
     @Override
-    public void displayImage(MediaInfo mediaInfo, LaunchListener listener) {
+    public void displayImage(MediaInfo mediaInfo, MediaPlayer.LaunchListener listener) {
         String mediaUrl = null;
         String mimeType = null;
         String title = null;
@@ -991,7 +1005,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
 
     @Override
     public void playMedia(String url, String mimeType, String title, String description,
-                          String iconSrc, boolean shouldLoop, LaunchListener listener) {
+                          String iconSrc, boolean shouldLoop, MediaPlayer.LaunchListener listener) {
         MediaInfo mediaInfo = new MediaInfo.Builder(url, mimeType)
                 .setTitle(title)
                 .setDescription(description)
@@ -1002,7 +1016,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
 
     @Override
     public void playMedia(MediaInfo mediaInfo, boolean shouldLoop,
-                          LaunchListener listener) {
+                          MediaPlayer.LaunchListener listener) {
         if ("4.0.0".equalsIgnoreCase(this.serviceDescription.getVersion())) {
             playMediaByNativeApp(mediaInfo, shouldLoop, listener);
         } else {
@@ -1148,7 +1162,6 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
 
     /**
      * Sets current channel
-     *
      * @param channelInfo must not be null
      * @param listener
      * @throws NullPointerException if channelInfo is null
@@ -1268,7 +1281,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
 
             @Override
             public void onSuccess(Object response) {
-                JSONObject jsonObj = (JSONObject) response;
+                JSONObject jsonObj = (JSONObject)response;
 
                 JSONObject status;
                 try {
@@ -1358,7 +1371,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
             @Override
             public void onSuccess(Object response) {
                 try {
-                    JSONObject jsonObj = (JSONObject) response;
+                    JSONObject jsonObj = (JSONObject)response;
                     JSONArray devices = (JSONArray) jsonObj.get("devices");
                     Util.postSuccess(listener, externalnputInfoFromJSONArray(devices));
                 } catch (JSONException e) {
@@ -1377,15 +1390,16 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     }
 
     @Override
-    public void setExternalInput(ExternalInputInfo externalInputInfo, final ResponseListener<Object> listener) {
+    public void setExternalInput(ExternalInputInfo externalInputInfo , final ResponseListener<Object> listener) {
         String uri = "ssap://tv/switchInput";
 
         JSONObject payload = new JSONObject();
 
         try {
-            if (externalInputInfo != null && externalInputInfo.getId() != null) {
+            if (externalInputInfo  != null && externalInputInfo .getId() != null) {
                 payload.put("inputId", externalInputInfo.getId());
-            } else {
+            }
+            else {
                 Log.w(Util.T, "ExternalInputInfo has no id");
             }
         } catch (JSONException e) {
@@ -1440,7 +1454,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
             @Override
             public void onSuccess(Object response) {
                 try {
-                    JSONObject jsonObj = (JSONObject) response;
+                    JSONObject jsonObj = (JSONObject)response;
                     String socketPath = (String) jsonObj.get("socketPath");
                     mouseSocket = new WebOSTVMouseSocketConnection(socketPath, successHandler);
                 } catch (JSONException e) {
@@ -1462,7 +1476,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public void click() {
         if (mouseSocket != null) {
             mouseSocket.click();
-        } else {
+        }
+        else {
             connectMouse(new WebOSTVMouseSocketConnection.WebOSTVMouseSocketListener() {
                 @Override
                 public void onConnected() {
@@ -1476,7 +1491,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public void move(final double dx, final double dy) {
         if (mouseSocket != null) {
             mouseSocket.move(dx, dy);
-        } else {
+        }
+        else {
             connectMouse(new WebOSTVMouseSocketConnection.WebOSTVMouseSocketListener() {
                 @Override
                 public void onConnected() {
@@ -1495,7 +1511,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public void scroll(final double dx, final double dy) {
         if (mouseSocket != null) {
             mouseSocket.scroll(dx, dy);
-        } else {
+        }
+        else {
             connectMouse(new WebOSTVMouseSocketConnection.WebOSTVMouseSocketListener() {
                 @Override
                 public void onConnected() {
@@ -1597,7 +1614,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
         if (mouseSocket != null) {
             mouseSocket.button(key);
             Util.postSuccess(listener, null);
-        } else {
+        }
+        else {
             connectMouse(new WebOSTVMouseSocketConnection.WebOSTVMouseSocketListener() {
                 @Override
                 public void onConnected() {
@@ -1633,7 +1651,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
         if (mouseSocket != null) {
             mouseSocket.click();
             Util.postSuccess(listener, null);
-        } else {
+        }
+        else {
             connectMouse(new WebOSTVMouseSocketConnection.WebOSTVMouseSocketListener() {
                 @Override
                 public void onConnected() {
@@ -1789,8 +1808,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
 
         try {
             if (launchSession.getAppId() != null) payload.put("webAppId", launchSession.getAppId());
-            if (launchSession.getSessionId() != null)
-                payload.put("sessionId", launchSession.getSessionId());
+            if (launchSession.getSessionId() != null) payload.put("sessionId", launchSession.getSessionId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1814,7 +1832,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
         String _appId = webAppSession.launchSession.getAppId();
         String _idKey = null;
 
-        if (webAppSession.launchSession.getSessionType() == LaunchSessionType.WebApp)
+        if (webAppSession.launchSession.getSessionType() == LaunchSession.LaunchSessionType.WebApp)
             _idKey = "webAppId";
         else
             _idKey = "appId";
@@ -1841,7 +1859,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
 
             @Override
             public void onSuccess(final Object response) {
-                JSONObject jsonObj = (JSONObject) response;
+                JSONObject jsonObj = (JSONObject)response;
 
                 String state = jsonObj.optString("state");
 
@@ -1933,7 +1951,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
                 JSONObject obj = (JSONObject) response;
                 if (obj.has("pairingType")) {
                     notifyPairingRequired();
-                } else if (listener != null) {
+                }
+                else if (listener != null) {
                     listener.onSuccess(response);
                 }
             }
@@ -1974,7 +1993,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
                 JSONObject obj = (JSONObject) response;
                 if (obj.has("pairingType")) {
                     notifyPairingRequired();
-                } else if (listener != null) {
+                }
+                else if (listener != null) {
                     listener.onSuccess(response);
                 }
             }
@@ -2045,7 +2065,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     @Override
     public ServiceSubscription<WebAppPinStatusListener> subscribeIsWebAppPinned(
             String webAppId, WebAppPinStatusListener listener) {
-        return (URLServiceSubscription<WebAppPinStatusListener>) isWebAppPinned(true, webAppId, listener);
+        return (URLServiceSubscription<WebAppPinStatusListener>)isWebAppPinned(true, webAppId, listener);
     }
 
     /* Join a native/installed webOS app */
@@ -2167,7 +2187,8 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
     public void sendMessage(String message, LaunchSession launchSession, ResponseListener<Object> listener) {
         if (message != null && message.length() > 0) {
             sendMessage((Object) message, launchSession, listener);
-        } else {
+        }
+        else {
             Util.postError(listener, new ServiceCommandError(0, "Cannot send a null message", null));
         }
     }
@@ -2191,7 +2212,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
             @Override
             public void onSuccess(Object response) {
                 try {
-                    JSONObject jsonObj = (JSONObject) response;
+                    JSONObject jsonObj = (JSONObject)response;
                     JSONArray services = (JSONArray) jsonObj.get("services");
                     Util.postSuccess(listener, services);
                 } catch (JSONException e) {
@@ -2216,7 +2237,7 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
             @Override
             public void onSuccess(Object response) {
                 try {
-                    JSONObject jsonObj = (JSONObject) response;
+                    JSONObject jsonObj = (JSONObject)response;
                     JSONObject features = (JSONObject) jsonObj.get("features");
                     Util.postSuccess(listener, features);
                 } catch (JSONException e) {
@@ -2422,14 +2443,11 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
 
             if (appCastingFeature != null) {
                 // <supportAppcastingFeatures>mirroring|remote-camera</supportAppcastingFeatures>
-                if (appCastingFeature.contains("mirroring"))
-                    capabilities.add(ScreenMirroringControl.ScreenMirroring);
-                if (appCastingFeature.contains("remote-camera"))
-                    capabilities.add(RemoteCameraControl.RemoteCamera);
+                if (appCastingFeature.contains("mirroring")) capabilities.add(ScreenMirroringControl.ScreenMirroring);
+                if (appCastingFeature.contains("remote-camera")) capabilities.add(RemoteCameraControl.RemoteCamera);
             } else if (appCasting != null) {
                 // <appCasting>support</appCasting>
-                if ("support".equals(appCasting))
-                    capabilities.add(ScreenMirroringControl.ScreenMirroring);
+                if ("support".equals(appCasting)) capabilities.add(ScreenMirroringControl.ScreenMirroring);
             }
         }
 
@@ -2532,11 +2550,9 @@ public class WebOSTVService extends WebOSTVDeviceService implements Launcher, Me
         }
     }
 
-    public static interface ServiceInfoListener extends ResponseListener<JSONArray> {
-    }
+    public static interface ServiceInfoListener extends ResponseListener<JSONArray> { }
 
-    public static interface SystemInfoListener extends ResponseListener<JSONObject> {
-    }
+    public static interface SystemInfoListener extends ResponseListener<JSONObject> { }
 
     /**********************************************************************************************
      * SCREEN MIRRORING

@@ -35,9 +35,6 @@ public class AllVideoFragment extends BaseFragment<FragmentAllVideoBinding> impl
     private String mimeType;
     private int count = 0;
     private String TAG = " AllVideoFragment";
-
-
-
     @Override
     protected FragmentAllVideoBinding getBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentAllVideoBinding.inflate(inflater, container, false);
@@ -81,7 +78,7 @@ public class AllVideoFragment extends BaseFragment<FragmentAllVideoBinding> impl
         Bundle bundle = new Bundle();
         bundle.putSerializable("item", item);
         count = 0;
-        playMediaFiles(item, Utils.video);
+        playMediaFiles(item);
     }
 
 
@@ -96,7 +93,7 @@ public class AllVideoFragment extends BaseFragment<FragmentAllVideoBinding> impl
                     CastScreenApplication.sAppInstance.mDevice.getMediaPlayer().closeMedia(CastScreenApplication.sAppInstance.mLaunchSession, null);
                 }
                 if (count < 6) {
-                    playMediaFiles(mediaURL, mimeType);
+//                    playMediaFiles(mediaURL, mimeType);
                     count++;
                 }
             }
@@ -110,19 +107,16 @@ public class AllVideoFragment extends BaseFragment<FragmentAllVideoBinding> impl
         }
     };
 
-    public void playMediaFiles(String mediaURL, String mimeType) {
+    public void playMediaFiles(String mediaURL) {
         if (CastScreenApplication.sAppInstance.mDevice == null) {
         } else if (CastScreenApplication.sAppInstance.mDevice.isConnected()) {
-            this.mimeType = mimeType;
             this.mediaURL = Utils.getIpAddress(getContext().getApplicationContext()) + ":" + Utils.PORT + mediaURL;
-            MediaInfo build = new MediaInfo.Builder(mediaURL, mimeType).setTitle("").setDescription("").setIcon("").build();
-
-            if (mimeType.equalsIgnoreCase(Utils.image)) {
-                CastScreenApplication.sAppInstance.mDevice.getCapability(MediaPlayer.class).displayImage(build, mLaunchListener);
-            }
-            if (mimeType.equalsIgnoreCase(Utils.video)) {
-                CastScreenApplication.sAppInstance.mDevice.getCapability(MediaPlayer.class).playMedia(build, false, this.mLaunchListener);
-            }
+            MediaInfo build = new MediaInfo.Builder(Utils.getIpAddress(context) + ":" + Utils.PORT +mediaURL, "video/mp4")
+                    .setTitle("")
+                    .setDescription("")
+                    .setIcon("")
+                    .build();
+                CastScreenApplication.sAppInstance.mDevice.getCapability(MediaPlayer.class).playMedia(build, true, this.mLaunchListener);
         } else {
             Log.d(TAG, "Device not connected");
         }

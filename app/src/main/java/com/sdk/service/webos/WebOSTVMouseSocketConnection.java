@@ -56,7 +56,7 @@ public class WebOSTVMouseSocketConnection {
     public WebOSTVMouseSocketConnection(String socketPath, WebOSTVMouseSocketListener listener) {
         Log.d("PtrAndKeyboardFragment", "got socketPath: " + socketPath);
 
-        this.listener = listener; 
+        this.listener = listener;
         this.socketPath = socketPath;
 
         try {
@@ -124,7 +124,7 @@ public class WebOSTVMouseSocketConnection {
     }
 
     public boolean isConnected() {
-        if (ws == null) 
+        if (ws == null)
             System.out.println("ws is null");
         else if (ws.getReadyState() != ReadyState.OPEN) {
             System.out.println("ws state is not ready");
@@ -139,30 +139,30 @@ public class WebOSTVMouseSocketConnection {
     }
 
     public void button(ButtonType type) {
-        String keyName; 
+        String keyName;
         switch (type) {
-        case HOME:
-            keyName = "HOME";
-            break;
-        case BACK:
-            keyName = "BACK";
-            break;
-        case UP:
-            keyName = "UP";
-            break;
-        case DOWN:
-            keyName = "DOWN";
-            break;
-        case LEFT:
-            keyName = "LEFT";
-            break;
-        case RIGHT:
-            keyName = "RIGHT";
-            break;
+            case HOME:
+                keyName = "HOME";
+                break;
+            case BACK:
+                keyName = "BACK";
+                break;
+            case UP:
+                keyName = "UP";
+                break;
+            case DOWN:
+                keyName = "DOWN";
+                break;
+            case LEFT:
+                keyName = "LEFT";
+                break;
+            case RIGHT:
+                keyName = "RIGHT";
+                break;
 
-        default:
-            keyName = "NONE";
-            break;
+            default:
+                keyName = "NONE";
+                break;
         }
 
         button(keyName);
