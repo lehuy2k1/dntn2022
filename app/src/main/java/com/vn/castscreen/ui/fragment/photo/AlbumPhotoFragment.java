@@ -72,15 +72,15 @@ public class AlbumPhotoFragment extends BaseFragment<FragmentAlbumBinding> imple
         while (cursor.moveToNext()) {
             absolutePathOfImage = cursor.getString(columnIndexData);
             for (int i = 0; i < allFolderImage.size(); i++) {
-                if (cursor.getString(columnIndexFolderName) != null) {
-                    if (allFolderImage.get(i).getName().equals(cursor.getString(columnIndexFolderName))) {
-                        isFolder = true;
-                        position = i;
-                        break;
-                    } else {
-                        isFolder = false;
-                    }
-                }
+//                if (cursor.getString(columnIndexFolderName) != null) {
+//                    if (allFolderImage.get(i).getName().equals(cursor.getString(columnIndexFolderName))) {
+//                        isFolder = true;
+//                        position = i;
+//                        break;
+//                    } else {
+//                        isFolder = false;
+//                    }
+//                }
             }
             if (isFolder) {
                 try {
